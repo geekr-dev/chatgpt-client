@@ -22,5 +22,5 @@ go run chat.go
 go build .
 mv chat-client /usr/local/bin/chatgpt
 ```
-
+终端输入chatgpt即可使用.
 
