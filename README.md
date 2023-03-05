@@ -18,8 +18,9 @@ go run chat.go
 
 
 # 安装到系统
+```bash
 go build .
 mv chat-client /usr/local/bin/chatgpt
-
+```
 
 
