@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/charmbracelet/glamour"
 	"github.com/common-nighthawk/go-figure"
@@ -61,6 +62,10 @@ func main() {
 		}
 
 		if userInput == "" || userInput == "\n" {
+			continue
+		}
+
+		if strings.HasSuffix(userInput, "\\c\n") {
 			continue
 		}
 
