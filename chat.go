@@ -66,6 +66,14 @@ func main() {
 		}
 
 		if strings.HasSuffix(userInput, "\\c\n") {
+			// 数组还原
+			messages = []gpt3.ChatCompletionMessage{
+				{
+					Role:    "system",
+					Content: "你是ChatGPT, OpenAI训练的大型语言模型, 请尽可能简洁地回答我的问题",
+				},
+			}
+			fmt.Println("会话已重置")
 			continue
 		}
 
@@ -75,6 +83,25 @@ func main() {
 				Content: userInput,
 			},
 		)
+
+		if len(messages) > 4096 {
+			// 数组还原
+			messages = []gpt3.ChatCompletionMessage{
+				{
+					Role:    "system",
+					Content: "你是ChatGPT, OpenAI训练的大型语言模型, 请尽可能简洁地回答我的问题",
+				},
+			}
+			fmt.Println("会话已重置")
+
+			// 重新添加消息
+			messages = append(
+				messages, gpt3.ChatCompletionMessage{
+					Role:    "user",
+					Content: userInput,
+				},
+			)
+		}
 
 		// 调用 ChatGPT API 接口生成回答
 		resp, err := client.CreateChatCompletion(
